@@ -1,0 +1,54 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  overflow: hidden;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.List {
+  background-color: white;
+  border-radius: 20px;
+  height: 400px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+}
+
+.Add-button {
+  background-color: #61dafb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  height: 45px;
+  width: 220px;
+  display: block;
+  cursor: pointer;
+  font-size: 0.8em;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 30px;
+}
+
+.None {
+  color: gray;
+  opacity: 0.5;
+}
