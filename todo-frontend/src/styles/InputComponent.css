@@ -1,0 +1,98 @@
+.Title {
+  height: 25px;
+  width: 250px;
+  font-size: medium;
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: #cfcfcf;
+}
+
+.Title:focus {
+  border-color: #61dafb;
+  outline: none;
+}
+
+.Description {
+  height: 30px;
+  outline: 0;
+  border: none;
+  font-size: small;
+}
+
+.Form {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  margin-right: 110px;
+}
+
+.Inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.Calendar {
+  color: black;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.Calendar:hover {
+  color: #61dafb;
+}
+
+.Confirm-button {
+  background-color: #61dafb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  height: 50px;
+  width: 150px;
+  display: block;
+  cursor: pointer;
+  font-size: 0.8em;
+  position: absolute;
+  margin-top: 100px;
+}
+
+.Date {
+  margin-left: 50%;
+  border-color: #666666;
+  border-style: solid;
+  border-radius: 10px;
+  outline: 0;
+  padding: 5px;
+}
+
+.Date:focus {
+  border-color: #61dafb;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  margin: 0;
+  margin-right: 20px;
+  font: inherit;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.1em solid currentColor;
+  border-radius: 50px;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  border-radius: 50px;
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #61dafb;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}

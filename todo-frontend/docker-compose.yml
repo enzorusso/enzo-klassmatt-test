@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  autis-app:
+    container_name: enzo_klassmatt_test
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - '3000'
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    stdin_open: true
+    tty: true
+    command: yarn start

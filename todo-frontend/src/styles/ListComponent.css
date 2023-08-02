@@ -1,0 +1,38 @@
+.List {
+  background-color: white;
+  border-radius: 20px;
+  height: 400px;
+  width: 600px;
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+}
+
+.Content {
+  margin-bottom: 10%;
+}
+
+.Add-button {
+  background-color: #61dafb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  height: 50px;
+  width: 235px;
+  display: block;
+  cursor: pointer;
+  font-size: 0.8em;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 70px;
+}
+
+.None {
+  color: gray;
+  opacity: 0.5;
+}
+
+.Add-button:hover {
+  background-color: white;
+  color: #61dafb;
+}
