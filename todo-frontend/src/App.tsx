@@ -1,27 +1,16 @@
-import './App.css';
-
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
+import './App.css';
+import ListComponent from './components/ListComponent';
+
 
 function App() {
-  const addToDo = () => {
-    console.log('chegou');
-  }
-
   return (
     <div className="App">
       <header className="App-header">
-        <div className='Content'>
-        <p>LEMBRETES</p>
-        <div className='List'>
-          <p className='None'> Nenhum lembrete disponível. </p>
-          <button className='Add-button' onClick={addToDo}>
-            <FontAwesomeIcon icon={faCirclePlus}></FontAwesomeIcon>&nbsp;
-              Novo Lembrete
-          </button>
-        </div>
-        </div>
+        <ListComponent></ListComponent>
       </header>
     </div>
   );

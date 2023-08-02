@@ -4,14 +4,10 @@
         "es2021": true
     },
     "extends": [
-        "xo",
         "plugin:react/recommended"
     ],
     "overrides": [
         {
-            "extends": [
-                "xo-typescript"
-            ],
             "files": [
                 "*.ts",
                 "*.tsx"
