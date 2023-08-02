@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -16,18 +11,17 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  overflow: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+.Content {
+  margin-bottom: 15%;
 }
 
 .List {
   background-color: white;
   border-radius: 20px;
   height: 400px;
-  width: 50%;
+  width: 600px;
   display: flex;
   justify-content: center;
   overflow-y: scroll;
@@ -38,17 +32,22 @@
   color: white;
   border: none;
   border-radius: 10px;
-  height: 45px;
-  width: 220px;
+  height: 50px;
+  width: 235px;
   display: block;
   cursor: pointer;
   font-size: 0.8em;
   position: absolute;
   bottom: 0;
-  margin-bottom: 30px;
+  margin-bottom: 70px;
 }
 
 .None {
   color: gray;
   opacity: 0.5;
+}
+
+button:hover {
+  background-color: white;
+  color: #61dafb;
 }
