@@ -10,7 +10,7 @@ input[type="checkbox"] {
   height: 1em;
   border: 0.1em solid currentColor;
   border-radius: 50px;
-  transform: translateY(-0.7em);
+  transform: translateY(-0.45em);
   display: grid;
   place-content: center;
   cursor: pointer;
@@ -31,10 +31,11 @@ input[type="checkbox"]:checked::before {
 }
 
 .item {
-  padding: 20px 0px 10px 10px;
+  padding-bottom:10px;
   width: 100%;
   display: flex;
   text-align: start;
+  justify-content: center;
   align-items: center;
 }
 
@@ -74,10 +75,14 @@ input[type="checkbox"]:checked::before {
   margin-left: 15px;
 }
 
-.strike {
+.striked {
   text-decoration: line-through; 
-  color: #cfcfcf;
+  color: #343434;
   opacity: 0.8;
+}
+
+.overdue {
+  color: #FF0000
 }
 
 input:disabled {

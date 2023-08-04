@@ -22,9 +22,9 @@ app.get("/api/tasks", function(req, res) {
 });
 
 app.post("/api/tasks", function(req, res) {
-  const { title, description, checked, due_date } = req.body;
+  const { title, description, checked, dueDate } = req.body;
   db.query(
-    'INSERT INTO tasks (title, description, checked, due_date) VALUES ($1, $2, $3, $4) RETURNING *', [title, description, checked, due_date], (error, results) => {
+    'INSERT INTO tasks (title, description, checked, due_date) VALUES ($1, $2, $3, $4) RETURNING *', [title, description, checked, dueDate], (error, results) => {
       if (error) {
         res.status(500).send(JSON.stringify(error));
       }
@@ -42,11 +42,11 @@ app.post("/api/tasks", function(req, res) {
 
 app.put("/api/tasks/:id", function(req, res) {
   const id = req.params.id;
-  const { title, description, checked, due_date } = req.body;
+  const { title, description, checked, dueDate } = req.body;
 
   db.query(
     'UPDATE tasks SET title = $1, description = $2, checked = $3, due_date = $4 WHERE id = $5',
-    [title, description, checked, due_date, id],
+    [title, description, checked, dueDate, id],
     (error, results) => {
       if (error) {
         res.status(500).send(JSON.stringify(error));
@@ -57,7 +57,7 @@ app.put("/api/tasks/:id", function(req, res) {
         ${title},
         ${description},
         ${checked},
-        ${due_date},
+        ${dueDate},
         `)
     }
   )

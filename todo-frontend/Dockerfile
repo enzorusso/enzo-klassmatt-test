@@ -1,13 +1,11 @@
-FROM node:16-alpine
+FROM node:18
 
-WORKDIR /app
-
-ENV PATH /app/node_modules/.bin:$PATH
+WORKDIR /usr/src/app
 
 COPY . .
 
-RUN npm i
+RUN yarn install
 
-RUN mkdir -p /app/node_modules && chmod -R 777 /app/node_modules
+EXPOSE 3000
 
-RUN npm i react-scripts@3.3.1 -g
+CMD ["npm", "start"]

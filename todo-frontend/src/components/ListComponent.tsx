@@ -12,76 +12,84 @@ import { toast } from 'react-toastify';
 const DEFAULT_TASK = { title: '', description: '', checked: false };
 
 function ListComponent() {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [activeEditTask, setActiveEditTask] = useState<ModifyTask>(DEFAULT_TASK);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+	const [tasks, setTasks] = useState<Task[]>([]);
+	const [activeEditTask, setActiveEditTask] = useState<ModifyTask>(DEFAULT_TASK);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const fetchTasks = useCallback(async () => {
-    try {
-      const response: Task[] = await getAll();
-      setTasks(response);
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+	const fetchTasks = useCallback(async () => {
+		try {
+			const response: Task[] = await getAll();
+			setTasks(response);
+		} catch (err) {
+			console.log(err);
+		}
+	}, []);
 
-  useEffect(() => {
-    fetchTasks();
-  }, [fetchTasks]);
+	useEffect(() => {
+		fetchTasks();
+	}, [fetchTasks]);
 
-  const openModal = (task?: ModifyTask) => {
-    if(task) {
-      setActiveEditTask(task);
-    }
-    setIsModalOpen(true);
-  }
+	const openModal = (task?: ModifyTask) => {
+		if (task) {
+			setActiveEditTask(task);
+		} else {
+			setActiveEditTask({} as Task);
+		}
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  }
+		setIsModalOpen(true);
+	};
 
-  const handleDeleteTask =async ( id:string) => {
-    try{
-      await deleteTask(id);
-      
-    } catch(err: any) {
-      if(err.status === '404') {
-        toast.error(`Id ${id} não encontrado para deleção!`)
-      } else {
-        toast.error('Algo deu errado! ' + err.message)
-      }
-    }
-      fetchTasks();
-  }
-  
-  const saveTask = async (task: ModifyTask) => {
-    if(task?.id) {
-      await editTask({...task, id: task.id});
-    } else {
-      await createTask(task);
-    }
-    fetchTasks();
-    closeModal();
-    setActiveEditTask(DEFAULT_TASK);
-  }
+	const closeModal = () => {
+		setIsModalOpen(false);
+	};
 
-  return (
-    <div className='content'>
-      <h4>Todo List</h4>
-      <div className='list'>
-        {tasks?.length > 0 ? 
-        tasks.map((task, i) => (
-          <ListItem task={task} onDelete={handleDeleteTask} onEdit={() => openModal(task)} key={task.id} />)) :
-          <p className='None'> Nenhum lembrete disponível. </p>
-        }
-        <button className='Add-button' onClick={() => openModal()}>
-          <FontAwesomeIcon icon={faCirclePlus}></FontAwesomeIcon>&nbsp;
-            Novo Lembrete
-        </button>
-          <Modal open={isModalOpen} task={activeEditTask} onSave={saveTask} onClose={closeModal} />
-      </div>
-    </div>
-  );
+	const handleDeleteTask = async (id: string) => {
+		try {
+			await deleteTask(id);
+			toast.success(`Tarefa removida!`);
+		} catch (err: any) {
+			if (err.status === '404') {
+				toast.error(`Id ${id} não encontrado para deleção!`);
+			} else {
+				toast.error('Algo deu errado! ' + err.message);
+			}
+		}
+		fetchTasks();
+	};
+
+	const saveTask = async (task: ModifyTask) => {
+		if (task?.id) {
+			await editTask({ ...task, id: task.id });
+		} else {
+			await createTask(task);
+		}
+		fetchTasks();
+		closeModal();
+	};
+
+	return (
+		<div className="content">
+			<h4>Todo List</h4>
+			<div className="list">
+				{tasks?.length > 0 ? (
+					tasks.map((task, i) => (
+						<ListItem
+							task={task}
+							onDelete={handleDeleteTask}
+							onEdit={() => openModal(task)}
+							key={task.id}
+						/>
+					))
+				) : (
+					<p className="none"> Nenhum lembrete disponível. </p>
+				)}
+			</div>
+			<button className="add-button" onClick={() => openModal()}>
+				<FontAwesomeIcon icon={faCirclePlus}></FontAwesomeIcon>&nbsp; Novo Lembrete
+			</button>
+			<Modal open={isModalOpen} task={activeEditTask} onSave={saveTask} onClose={closeModal} />
+		</div>
+	);
 }
 
 export default ListComponent;

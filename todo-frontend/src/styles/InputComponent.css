@@ -1,5 +1,4 @@
 .input {
-  margin: 10px 0;
   font-size: 0.8em;
   outline: 0;
   border-width: 0 0 2px;
@@ -20,6 +19,7 @@
 .error-message {
   font-size: 0.5em;
   color: #ff0000;
+  padding-bottom: 16px;
 }
 
 .datepicker {

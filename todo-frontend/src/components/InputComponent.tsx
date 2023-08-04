@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react';
 
 import '../styles/InputComponent.css';
-import DatePicker from 'react-datepicker';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import ptBR from 'date-fns/locale/pt-BR';
 
 type InputProps = {
 	placeholder: string;
@@ -13,6 +14,8 @@ type InputProps = {
 	onChange: (value: any) => void;
 	errorMessage?: ReactNode;
 };
+
+registerLocale('pt-BR', ptBR);
 
 const DatepickerComponent = ({
 	name,
@@ -28,8 +31,8 @@ const DatepickerComponent = ({
 				{label}
 			</label>
 			<DatePicker
-        isClearable
-        withPortal={false}
+				isClearable
+				withPortal={false}
 				popperModifiers={[
 					{
 						name: 'preventOverflow',
@@ -43,6 +46,7 @@ const DatepickerComponent = ({
 						},
 					},
 				]}
+				locale="pt-BR"
 				className="input"
 				popperPlacement="bottom"
 				calendarClassName="datepicker"

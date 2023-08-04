@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Task } from '../model/task';
@@ -7,9 +7,9 @@ import '../styles/ListItem.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import { editTask } from '../services/tasks';
 import { toast } from 'react-toastify';
-
-const addZeros = (n: number) => n<10? '0'+n:''+n;
-const formatDate = (d: Date) => `${addZeros(d.getDate())}/${addZeros(d.getMonth() + 1)}/${d.getFullYear()}`;
+import classNames from 'classnames';
+import dayjs from 'dayjs';
+import { format, isAfter } from 'date-fns';
 
 function ListItem({
 	task,
@@ -35,13 +35,21 @@ function ListItem({
 		}
 	};
 
+	const isDateOverdue = useMemo(
+		() => task?.dueDate && isAfter(new Date(task.dueDate), new Date()) && !checked,
+		[task.dueDate, checked]
+	);
+
 	return (
 		<div className="item">
 			<input type="checkbox" checked={checked} onChange={handleCheckedChange} />
-			<div className="labels">
+			<div className={classNames('labels', { striked: checked })}>
 				<p className="title-task"> {task.title} </p>
 				<p className="description"> {task.description} </p>
-				<p className="date"> {task?.due_date && formatDate(new Date(task.due_date))} </p>
+				<p className={classNames('date', { overdue: isDateOverdue })}>
+					{' '}
+					{task?.dueDate && format(new Date(task.dueDate), 'dd/MM/yyyy')}{' '}
+				</p>
 			</div>
 
 			<FontAwesomeIcon

@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres
+    volumes:
+      - ./db/start.sql:/docker-entrypoint-initdb.d/db/start.sql
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - '5432:5432'
+  backend:
+    build:
+      context: todo-backend
+      dockerfile: ./todo-backend/Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - '.:/backend-app'
+      - '/backend-app/node_modules'
+    command: yarn start
+  frontend:
+    build:
+      context: todo-frontend
+      dockerfile: ./todo-frontend/Dockerfile
+    expose:
+      - '3000'
+    ports:
+      - '3000:3000'
+    volumes:
+      - '.:/frontend-app'
+      - '/frontend-app/node_modules'
+    command: yarn start
