@@ -15,6 +15,7 @@ const getTasks = function(req, res) {
 
 const createTask = function(req, res) {
   const { title, description, checked, dueDate } = req.body;
+  
   db.query(
     'INSERT INTO tasks (title, description, checked, due_date) VALUES ($1, $2, $3, $4) RETURNING *', [title, description, checked, dueDate], (error, results) => {
       if (error) {

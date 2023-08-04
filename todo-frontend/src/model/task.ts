@@ -2,7 +2,7 @@ export type ModifyTask = {
   id?: string,
   title: string,
   description: string,
-  dueDate?: string,
+  dueDate?: Date,
   checked: boolean
 }
 

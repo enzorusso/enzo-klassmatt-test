@@ -68,7 +68,7 @@ function Modal({
 			setTitle(task.title);
 			setDescription(task.description);
 			if (task.dueDate) {
-				setDate(task.dueDate);
+				setDate(task.dueDate.toUTCString());
 			}
 		}
 	}, [task.title, task.description, task.dueDate]);
@@ -79,9 +79,9 @@ function Modal({
 		try {
 			setSubmitted(true);
 			if (task.id) {
-				onSave({ ...task, title, description, dueDate: date });
+				onSave({ ...task, title, description, dueDate: !date ? undefined : new Date(date) });
 			} else {
-				onSave({ title, description, dueDate: date, checked: false });
+				onSave({ title, description, dueDate: !date ? undefined : new Date(date), checked: false });
 			}
 			toast.success(`Tarefa salva!`);
 			handleCloseModal();
