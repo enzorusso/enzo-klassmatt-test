@@ -64,21 +64,20 @@ function Modal({
 	}, [open]);
 
 	useEffect(() => {
-		console.log(task);
 		if (task.id) {
 			setTitle(task.title);
 			setDescription(task.description);
-			if (task.dueDate) {
-				setDate(task.dueDate.toUTCString());
+			if (task?.dueDate) {
+				setDate(new Date(task.dueDate).toUTCString());
 			}
 		}
 	}, [task.title, task.description, task.dueDate]);
 
 	const handleSave = () => {
+		setSubmitted(true);
 		if (!title || !description) return;
 
 		try {
-			setSubmitted(true);
 			if (task.id) {
 				onSave({ ...task, title, description, dueDate: !date ? undefined : new Date(date) });
 			} else {
