@@ -1,58 +1,83 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
-import { Todo } from '../model/todo';
+import React, { ReactNode } from 'react';
 
 import '../styles/InputComponent.css';
-import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from 'react-datepicker';
 
-function InputComponent({_todo}:{_todo: Todo}) {
-  const [todo, setTodo] = useState<Todo>(_todo);
+type InputProps = {
+	placeholder: string;
+	type?: 'text' | 'datepicker';
+	label: string;
+	name: string;
+	value: any;
+	readonly?: boolean;
+	onChange: (value: any) => void;
+	errorMessage?: ReactNode;
+};
 
-  const handleChange = () => {
-    setTodo({...todo, checked: !todo.checked});
-  };
+const DatepickerComponent = ({
+	name,
+	label,
+	placeholder,
+	errorMessage,
+	value,
+	onChange,
+}: InputProps) => {
+	return (
+		<div className="wrapper">
+			<label className="label" htmlFor={name}>
+				{label}
+			</label>
+			<DatePicker
+        isClearable
+        withPortal={false}
+				popperModifiers={[
+					{
+						name: 'preventOverflow',
+						enabled: false,
+						options: {
+							altAxis: true,
+							altBoundary: true,
+							tether: true,
+							rootBoundary: 'document',
+							padding: 8,
+						},
+					},
+				]}
+				className="input"
+				popperPlacement="bottom"
+				calendarClassName="datepicker"
+				startDate={new Date()}
+				selected={value ? new Date(value) : null}
+				onChange={(date) => onChange(date)}
+				dateFormat={'dd/MM/yyyy'}
+				placeholderText={placeholder}
+			/>
+			{errorMessage && <span className="error-message">{errorMessage}</span>}
+		</div>
+	);
+};
 
-  return (
-    <>
-    <div className='Form'>
-      <input 
-        type='checkbox' 
-        checked={todo.checked}
-        onChange={handleChange}
-      />
-      <div className='Inputs'>
-        <input 
-          type='text'
-          className='Title'
-          placeholder='Adicionar título' 
-          value={todo.title}
-          onChange={event => setTodo({...todo, title: event.target.value})}
-        />
-        <input 
-          type='text'
-          className='Description'
-          placeholder='Adicionar descrição'
-          value={todo.description}
-          onChange={event => setTodo({...todo, description: event.target.value})}
-        />
-      </div>
-      <DatePicker 
-        placeholderText='Data de expiração'
-        className='Date'
-        locale={'ptBR'} 
-        selected={todo.date} 
-        dateFormat={"dd/MM/yyyy"} 
-        onChange={(date: Date) => setTodo({...todo, date: date})}
-      />
-    </div>
-    <button className='Confirm-button'>
-      <FontAwesomeIcon icon={faCircleCheck}></FontAwesomeIcon>&nbsp;
-      Adicionar
-    </button>
-    </>
-  );
+function InputComponent({ type, ...props }: InputProps) {
+	if (type === 'datepicker') return <DatepickerComponent {...props} />;
+
+	const { placeholder, label, name, value, onChange, errorMessage } = props;
+
+	return (
+		<div className="wrapper">
+			<label className="label" htmlFor={name}>
+				{label}
+			</label>
+			<input
+				type={type}
+				className="input"
+				placeholder={placeholder}
+				name={name}
+				value={value}
+				onChange={(e) => onChange(e.target.value)}
+			/>
+			{errorMessage && <span className="error-message">{errorMessage}</span>}
+		</div>
+	);
 }
 
 export default InputComponent;

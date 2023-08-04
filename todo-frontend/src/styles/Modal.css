@@ -1,0 +1,104 @@
+.date-label {
+  margin: 0 10px;
+  color: #757575;
+  text-align: start;
+}
+
+.title {
+  font-weight: 600;
+  color: #343434;
+}
+
+.modal {
+  width: 60%;
+  height: 60%;
+  border-radius: 7px;
+  border: none;
+}
+
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.input {
+  margin: 10px 0;
+  font-size: 0.8em;
+  outline: 0;
+  border-width: 0 0 2px;
+  width: 100%;
+  border-color: #cfcfcf;
+}
+
+.input:focus {
+  border-color: #61dafb;
+  outline: none;
+}
+
+.react-datepicker__tether-element {
+  z-index: 9999 !important;
+}
+
+.calendar-icon {
+  position: absolute;
+  right: 70px;
+  display: block;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.calendar-icon:hover {
+  color: #61dafb;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 40px;
+}
+
+.calendar {
+  position: fixed !important;
+  z-index: 1;
+}
+
+.button {
+  background-color: #61dafb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  height: 50px;
+  width: 235px;
+  display: block;
+  cursor: pointer;
+  font-size: 0.8em;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 70px;
+}
+
+.button:hover {
+  background-color: transparent;
+  color: #61dafb;
+  border: 1.5px solid;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 40px;
+}
+
+.x-icon {
+  cursor: pointer;
+}
+
+.x-icon:hover {
+  color: #61dafb;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}

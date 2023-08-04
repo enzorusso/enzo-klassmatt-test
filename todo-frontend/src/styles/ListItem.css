@@ -1,0 +1,85 @@
+p {
+  margin: 0;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  margin-right: 20px;
+  font: inherit;
+  width: 1em;
+  height: 1em;
+  border: 0.1em solid currentColor;
+  border-radius: 50px;
+  transform: translateY(-0.7em);
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  border-radius: 50px;
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #61dafb;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(0.8);
+}
+
+.item {
+  padding: 20px 0px 10px 10px;
+  width: 100%;
+  display: flex;
+  text-align: start;
+  align-items: center;
+}
+
+.title-task {
+  color: #343434;
+  font-weight: 600;
+  font-size: 1em;
+  border-bottom: 2px solid #61dafb;
+}
+
+.description {
+  color: #343434;
+  font-size: 0.8em;
+}
+
+.date {
+  color: #343434;
+  font-size: 0.6em;
+}
+
+.labels {
+  width: 70%;
+  outline: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.icon-button-edit {
+  cursor: pointer;
+  color: black;
+  margin-left: 20px;
+}
+
+.icon-button-delete {
+  cursor: pointer;
+  color: #F44336;
+  margin-left: 15px;
+}
+
+.strike {
+  text-decoration: line-through; 
+  color: #cfcfcf;
+  opacity: 0.8;
+}
+
+input:disabled {
+  background-color: white;
+}
