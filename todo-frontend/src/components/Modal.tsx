@@ -12,6 +12,7 @@ import '../styles/Modal.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
 import InputComponent from './InputComponent';
+import { toast } from 'react-toastify';
 
 const errorMessage = (fieldName: string) => `O campo ${fieldName} é obrigatório.`;
 
@@ -73,16 +74,20 @@ function Modal({
 	}, [task.title, task.description, task.dueDate]);
 
 	const handleSave = () => {
-		setSubmitted(true);
-
 		if (!title || !description) return;
 
-		if (task.id) {
-			onSave({ ...task, title, description, dueDate: date });
-		} else {
-			onSave({ title, description, dueDate: date, checked: false });
+		try {
+			setSubmitted(true);
+			if (task.id) {
+				onSave({ ...task, title, description, dueDate: date });
+			} else {
+				onSave({ title, description, dueDate: date, checked: false });
+			}
+			toast.success(`Tarefa salva!`);
+			handleCloseModal();
+		} catch (err: any) {
+			toast.error('Algo deu errado! ' + err.message);
 		}
-		handleCloseModal();
 	};
 
 	return (
