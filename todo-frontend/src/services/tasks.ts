@@ -30,8 +30,8 @@ export async function deleteTask(id: string): Promise<any> {
 }
 
 export async function editTask(
-  task: Task,
-): Promise<Task> {
+  task: ModifyTask,
+): Promise<ModifyTask> {
   const response = await api
     .put(`${serviceName}/${task.id}`, task)
     .then(response => response.data.data)

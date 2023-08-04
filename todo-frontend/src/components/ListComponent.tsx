@@ -33,7 +33,7 @@ function ListComponent() {
 		if (task) {
 			setActiveEditTask(task);
 		} else {
-			setActiveEditTask({} as Task);
+			setActiveEditTask({} as ModifyTask);
 		}
 
 		setIsModalOpen(true);
@@ -76,7 +76,7 @@ function ListComponent() {
 						<ListItem
 							task={task}
 							onDelete={handleDeleteTask}
-							onEdit={() => openModal(task)}
+							onEdit={() => openModal(task as ModifyTask)}
 							key={task.id}
 						/>
 					))

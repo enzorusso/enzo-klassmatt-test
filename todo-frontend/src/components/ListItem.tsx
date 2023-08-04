@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Task } from '../model/task';
+import { ModifyTask, Task } from '../model/task';
 
 import '../styles/ListItem.css';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -25,7 +25,7 @@ function ListItem({
 		const newState = !checked;
 		isChecked(newState);
 		try {
-			await editTask({ ...task, checked: newState });
+			await editTask({ ...task, checked: newState } as ModifyTask);
 			if (newState) {
 				toast.success('Parabéns! Tarefa concluída!');
 			}
