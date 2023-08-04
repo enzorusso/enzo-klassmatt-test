@@ -14,4 +14,4 @@ e executar o comando
 
 ```docker-compose up``` ou ```docker-compose up --build```
 
-Após concluído a criação dos containers, basta abrir o navegador e acessar [localhost:3000](localhost:3000)
+Após concluído a criação dos containers, basta abrir o navegador e acessar [localhost:3000](localhost:3000).
