@@ -102,3 +102,14 @@
 .react-datepicker-wrapper {
   width: 100%;
 }
+
+.react-datepicker__close-icon {
+  padding: 0 0 10px 0;
+}
+
+.react-datepicker__close-icon::after {
+  background-color: #61dafb;
+  font-size: 23px;
+  height: 23px;
+  width: 23px;
+}

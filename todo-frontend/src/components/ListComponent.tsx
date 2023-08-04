@@ -78,9 +78,7 @@ function ListComponent() {
           <FontAwesomeIcon icon={faCirclePlus}></FontAwesomeIcon>&nbsp;
             Novo Lembrete
         </button>
-        
-          <Modal  open={isModalOpen} task={activeEditTask} onSave={saveTask} onClose={closeModal} />
-        
+          <Modal open={isModalOpen} task={activeEditTask} onSave={saveTask} onClose={closeModal} />
       </div>
     </div>
   );
