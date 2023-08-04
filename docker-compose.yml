@@ -1,27 +1,39 @@
 services:
   postgres:
+    container_name: enzo-klassmatt-test-postgres
     image: postgres
     volumes:
-      - ./db/start.sql:/docker-entrypoint-initdb.d/db/start.sql
+      - ./start.sql:/docker-entrypoint-initdb.d/start.sql
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
     ports:
       - '5432:5432'
   backend:
+    container_name: enzo-klassmatt-test-backend
+    image: enzo-klassmatt-test-backend
     build:
       context: todo-backend
-      dockerfile: ./todo-backend/Dockerfile
+      dockerfile: Dockerfile
     ports:
-      - "3001:3001"
+      - '3001:3001'
+    environment:
+      DB_USER: postgres
+      DB_HOST: host.docker.internal
+      DB_NAME: todolist
+      DB_PASSWORD: root
     volumes:
       - '.:/backend-app'
       - '/backend-app/node_modules'
     command: yarn start
+    depends_on:
+      - postgres
   frontend:
+    container_name: enzo-klassmatt-test-frontend
+    image: enzo-klassmatt-test-frontend
     build:
       context: todo-frontend
-      dockerfile: ./todo-frontend/Dockerfile
+      dockerfile: Dockerfile
     expose:
       - '3000'
     ports:

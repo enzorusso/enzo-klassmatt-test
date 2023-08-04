@@ -6,5 +6,10 @@ O intuito deste repositório é armazenar os arquivos fontes de um sistema de To
 
 ## Como rodar a aplicação
 
+Após clonar o repositório, encontrar o diretório no seu computador, entrar na pasta com:
+
 ```cd enzo-klassmatt-test```
+
+e executar o comando
+
 ```docker-compose up```

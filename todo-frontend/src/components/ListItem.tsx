@@ -8,7 +8,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { editTask } from '../services/tasks';
 import { toast } from 'react-toastify';
 import classNames from 'classnames';
-import dayjs from 'dayjs';
 import { format, isAfter } from 'date-fns';
 
 function ListItem({
