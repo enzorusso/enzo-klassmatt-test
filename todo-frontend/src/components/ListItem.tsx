@@ -35,7 +35,7 @@ function ListItem({
 	};
 
 	const isDateOverdue = useMemo(
-		() => task?.dueDate && isAfter(task.dueDate, new Date()) && !checked,
+		() => task?.dueDate && isAfter(new Date(), new Date(task.dueDate)) && !checked,
 		[task.dueDate, checked]
 	);
 
