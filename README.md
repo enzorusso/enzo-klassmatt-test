@@ -12,4 +12,6 @@ Após clonar o repositório, encontrar o diretório no seu computador, entrar na
 
 e executar o comando
 
-```docker-compose up```
+```docker-compose up``` ou ```docker-compose up --build```
+
+Após concluído a criação dos containers, basta abrir o navegador e acessar [localhost:3000](localhost:3000)
