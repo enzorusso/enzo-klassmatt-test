@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { ModifyTask, Task } from '../model/task';
+import { Task } from '../model/task';
 
 import '../styles/ListItem.css';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -17,7 +17,7 @@ function ListItem({
 }: {
 	task: Task;
 	onEdit: (task: Task) => void;
-	onDelete: (id: string) => void;
+	onDelete: (id: Task) => void;
 }) {
 	const [checked, isChecked] = useState(task.checked);
 
@@ -25,7 +25,7 @@ function ListItem({
 		const newState = !checked;
 		isChecked(newState);
 		try {
-			await editTask({ ...task, checked: newState } as ModifyTask);
+			await editTask({ ...task, checked: newState });
 			if (newState) {
 				toast.success('Parabéns! Tarefa concluída!');
 			}
@@ -35,7 +35,7 @@ function ListItem({
 	};
 
 	const isDateOverdue = useMemo(
-		() => task?.dueDate && isAfter(new Date(task.dueDate), new Date()) && !checked,
+		() => task?.dueDate && isAfter(task.dueDate, new Date()) && !checked,
 		[task.dueDate, checked]
 	);
 
@@ -46,7 +46,6 @@ function ListItem({
 				<p className="title-task"> {task.title} </p>
 				<p className="description"> {task.description} </p>
 				<p className={classNames('date', { overdue: isDateOverdue })}>
-					{' '}
 					{task?.dueDate && format(new Date(task.dueDate), 'dd/MM/yyyy')}{' '}
 				</p>
 			</div>
@@ -56,9 +55,10 @@ function ListItem({
 				onClick={() => onEdit(task)}
 				icon={faPencil}
 			></FontAwesomeIcon>
+
 			<FontAwesomeIcon
 				className="icon-button-delete"
-				onClick={() => onDelete(task.id)}
+				onClick={() => onDelete(task)}
 				icon={faTrash}
 			></FontAwesomeIcon>
 		</div>

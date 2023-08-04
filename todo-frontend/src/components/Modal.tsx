@@ -6,7 +6,7 @@ import {
 	faCirclePlus,
 	faXmark,
 } from '@fortawesome/free-solid-svg-icons';
-import { ModifyTask, Task } from '../model/task';
+import { Task } from '../model/task';
 
 import '../styles/Modal.css';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -23,8 +23,8 @@ function Modal({
 	onClose,
 }: {
 	open: boolean;
-	task: ModifyTask;
-	onSave: (task: ModifyTask) => void;
+	task: Task;
+	onSave: (task: Task) => void;
 	onClose: () => void;
 }) {
 	const dialogRef = useRef<HTMLDialogElement>(null);
@@ -64,6 +64,7 @@ function Modal({
 	}, [open]);
 
 	useEffect(() => {
+		console.log(task);
 		if (task.id) {
 			setTitle(task.title);
 			setDescription(task.description);

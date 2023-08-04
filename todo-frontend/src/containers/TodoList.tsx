@@ -1,20 +1,21 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
-
-import { ModifyTask, Task } from '../model/task';
-import { createTask, deleteTask, editTask, getAll } from '../services/tasks';
 import { toast } from 'react-toastify';
 
-import '../styles/ListComponent.css';
+import { createTask, deleteTask, editTask, getAll } from '../services/tasks';
+import { Task } from '../model/task';
+
 import ListItem from '../components/ListItem';
 import Modal from '../components/Modal';
+
+import '../styles/ListComponent.css';
 
 const DEFAULT_TASK = { title: '', description: '', checked: false };
 
 function TodoList() {
 	const [tasks, setTasks] = useState<Task[]>([]);
-	const [activeEditTask, setActiveEditTask] = useState<ModifyTask>(DEFAULT_TASK);
+	const [activeEditTask, setActiveEditTask] = useState<Task>(DEFAULT_TASK);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const fetchTasks = useCallback(async () => {
@@ -30,11 +31,11 @@ function TodoList() {
 		fetchTasks();
 	}, [fetchTasks]);
 
-	const openModal = (task?: ModifyTask) => {
+	const openModal = (task?: Task) => {
 		if (task) {
 			setActiveEditTask(task);
 		} else {
-			setActiveEditTask({} as ModifyTask);
+			setActiveEditTask({} as Task);
 		}
 
 		setIsModalOpen(true);
@@ -44,13 +45,18 @@ function TodoList() {
 		setIsModalOpen(false);
 	};
 
-	const handleDeleteTask = async (id: string) => {
+	const handleDeleteTask = async (task: Task) => {
+		if (!task.id) {
+			toast.error('Houve um erro ao remover a tarefa. Por favor, tente novamente.');
+			return;
+		}
+
 		try {
-			await deleteTask(id);
+			await deleteTask(task.id);
 			toast.success(`Tarefa removida!`);
 		} catch (err: any) {
 			if (err.status === '404') {
-				toast.error(`Id ${id} não encontrado para deleção!`);
+				toast.error(`Id ${task.id} não encontrado para deleção!`);
 			} else {
 				toast.error('Algo deu errado! ' + err.message);
 			}
@@ -58,7 +64,7 @@ function TodoList() {
 		fetchTasks();
 	};
 
-	const saveTask = async (task: ModifyTask) => {
+	const saveTask = async (task: Task) => {
 		if (task?.id) {
 			await editTask({ ...task, id: task.id });
 		} else {
@@ -77,7 +83,7 @@ function TodoList() {
 						<ListItem
 							task={task}
 							onDelete={handleDeleteTask}
-							onEdit={() => openModal(task as ModifyTask)}
+							onEdit={() => openModal(task as Task)}
 							key={task.id}
 						/>
 					))

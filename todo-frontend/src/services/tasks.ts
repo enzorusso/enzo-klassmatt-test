@@ -1,5 +1,5 @@
 import api from './api';
-import { ModifyTask, Task } from '../model/task';
+import {  Task } from '../model/task';
 
 const serviceName = '/tasks';
 
@@ -8,7 +8,7 @@ export async function getAll(): Promise<Task[]> {
   return response.data;
 }
 
-export async function createTask(task: ModifyTask) {
+export async function createTask(task: Task) {
   let response = null;
   await api
     .post(`${serviceName}`, task)
@@ -30,8 +30,8 @@ export async function deleteTask(id: string): Promise<any> {
 }
 
 export async function editTask(
-  task: ModifyTask,
-): Promise<ModifyTask> {
+  task: Task,
+): Promise<Task> {
   const response = await api
     .put(`${serviceName}/${task.id}`, task)
     .then(response => response.data.data)
