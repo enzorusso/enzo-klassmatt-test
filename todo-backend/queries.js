@@ -1,3 +1,7 @@
+const { postgres } = require('./connection');
+
+const db = postgres();
+
 const getTasks = function(req, res) {
   db.query(
     'SELECT * FROM tasks ORDER BY id ASC', (error, results) => {
