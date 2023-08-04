@@ -67,7 +67,7 @@ function ListComponent() {
 
   return (
     <div className='content'>
-      <p>Todo List</p>
+      <h4>Todo List</h4>
       <div className='list'>
         {tasks?.length > 0 ? 
         tasks.map((task, i) => (
